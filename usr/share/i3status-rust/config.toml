@@ -1,0 +1,59 @@
+[theme]
+theme = "bad-wolf"
+[theme.overrides]
+alternating_tint_bg = "#1a1a1a"
+info_bg = "#8bcc66"
+info_fg = "#1a1a1a"
+idle_bg = "#1a1a1a"
+
+[icons]
+icons = "awesome5"
+
+[[block]]
+block = "music"
+separator = " / "
+interface_name_exclude = ["firefox"]
+
+[[block]]
+block = "sound"
+device_kind = "sink"
+max_vol = 100
+[block.icons_overrides]
+volume_muted = ""
+[[block.click]]
+button = "left"
+cmd = "footclient -- pulsemixer"
+
+[[block]]
+block = "sound"
+device_kind = "source"
+step_width = 0
+format = "$icon"
+[block.icons_overrides]
+microphone = ""
+microphone_muted = "  "
+
+[[block]]
+block = "custom"
+command = "echo "
+interval = "once"
+[[block.click]]
+button = "left"
+cmd = "/usr/libexec/dark-mode-toggle"
+
+[[block]]
+block = "custom"
+command = "echo -n ' ' && cat $XDG_RUNTIME_DIR/notifications"
+interval = "once"
+watch_files = ["$XDG_RUNTIME_DIR/notifications"]
+[[block.click]]
+button = "left"
+cmd = "swaync-client -t -sw"
+
+[[block]]
+block = "time"
+format = "$icon $timestamp.datetime(f:'%a %F %T')"
+interval = 1
+[[block.click]]
+button = "left"
+cmd = "org.gnome.Calendar"

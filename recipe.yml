@@ -1,17 +1,17 @@
 # This file can only be edited inside the uBlue image's git repository.
 
 # The image will be at "ghcr.io/yourusername/name".
-name: startingpoint
+name: ublue-custom
 
 # The native container image to build on top of.
 # Warning: Non-uBlue images might not work properly, due to missing components.
-base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/ublue-os/base-main
 
 # What Fedora version to use. Use an explicit version or `latest`.
 # If you use `latest`, you will be automatically updated to the next major
 # Fedora version, assuming the image you're using as your base container
 # builds with the tag (all uBlue images do this).
-fedora-version: 38
+fedora-version: latest
 
 # This description will be visible in the container metadata.
 description: A starting point for further customization of uBlue images. Make your own! https://ublue.it/making-your-own/
@@ -48,6 +48,10 @@ rpm:
   repos:
     # Example (which also demonstrates version number expansion):
     # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%FEDORA_VERSION%/atim-starship-fedora-%FEDORA_VERSION%.repo
+    - https://copr.fedorainfracloud.org/coprs/atim/i3status-rust/repo/fedora-%FEDORA_VERSION%/atim-i3status-rust-fedora-%FEDORA_VERSION%.repo
+    - https://copr.fedorainfracloud.org/coprs/erikreider/SwayNotificationCenter/repo/fedora-%FEDORA_VERSION%/erikreider-SwayNotificationCenter-fedora-%FEDORA_VERSION%.repo
+
+
 
   # These RPMs will be installed from your enabled repositories (Fedora's own
   # repos, extra "repos" you've added, etc). The installation is automatically
@@ -55,15 +59,39 @@ rpm:
   # at the "system level" in the final image.
   install:
     # Needed for yafti (the first boot installer). Remove if you're not using yafti.
-    - python3-pip
+    # - python3-pip
     # GNOME's GTK4 theme, Libadwaita. Already included in Silverblue, but not
     # other spins. You can remove if you aren't using yafti, but many native
     # apps and binaries require it, so it's a good idea to always include it
     # if you ever download or compile any custom software on your machine.
-    - libadwaita
+    # - libadwaita
     # Add your own below:
     # Example:
     # - tilix
+    - fish
+    - gammastep
+    - grim
+    - i3status-rust
+    - playerctl
+    - polkit-gnome
+    - slurp
+    - sway
+    - swayidle
+    - swaylock
+    - wl-clipboard
+    - rofi-wayland
+    - SwayNotificationCenter
+    - uptimed
+    - fontawesome5-fonts
+    - jetbrains-mono-fonts
+    - google-roboto-fonts
+    - gnome-system-monitor
+    - nautilus
+    - f38-backgrounds-base
+    - gnome-settings-daemon
+    - gnome-themes-extra
+    - gnome-online-accounts
+    - gnome-keyring
 
   # These RPMs will be removed from the system image. This step happens during
   # image build, BEFORE installing custom RPMs (from the "rpm.install" category).
@@ -77,7 +105,7 @@ firstboot:
   # Whether to embed "yafti" into the OS image and configure it to autostart,
   # which is the preferred uBlue "first boot" GUI. Set this to "false" if you've
   # decided to use a different solution instead.
-  yafti: true
+  yafti: false
 
   # These Flatpaks will be suggested for install after user login, via the yafti
   # "first boot" GUI. Everything below will be merged into the "yafti.yml" config

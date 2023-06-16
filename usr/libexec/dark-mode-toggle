@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+COLOR_SCHEME=$(gsettings get org.gnome.desktop.interface color-scheme)
+
+echo $COLOR_SCHEME
+
+case $COLOR_SCHEME in
+	"'prefer-dark'")
+		exec "$HOME"/.config/gammastep/hooks/change-color-scheme period-changed none daytime
+		;;
+	*)
+		exec "$HOME"/.config/gammastep/hooks/change-color-scheme period-changed none night
+		;;
+esac
