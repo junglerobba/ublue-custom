@@ -1,0 +1,13 @@
+#!/bin/sh
+case $1 in
+	period-changed)
+		case $3 in
+			daytime)
+				gsettings set org.gnome.desktop.interface color-scheme default
+				;;
+			night)
+				gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+				;;
+		esac
+		;;
+esac
