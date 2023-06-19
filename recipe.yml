@@ -92,6 +92,7 @@ rpm:
     - gnome-themes-extra
     - gnome-online-accounts
     - gnome-keyring
+    - evolution-data-server
 
   # These RPMs will be removed from the system image. This step happens during
   # image build, BEFORE installing custom RPMs (from the "rpm.install" category).
