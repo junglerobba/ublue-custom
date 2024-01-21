@@ -42,7 +42,6 @@ modules:
       - nautilus
       - playerctl
       - polkit-gnome
-      - pulseaudio-utils
       - rofi-wayland
       - slurp
       - sway
